@@ -1,0 +1,44 @@
+AppMode = 'debug'
+AppName = 'campus-hub-server'
+
+[Avatar]
+
+[DB]
+Name = 'campushub'
+Password = '123456'
+Port = 3306
+Type = 'mysql'
+User = 'campushub'
+
+[OSS]
+EndPoint = 'http://oss-cn-hangzhou.aliyuncs.com'
+AccessKeyId = ''
+AccessKeySecret = ''
+BucketName = ''
+MainDirecotory = 3
+PartSize = 102400
+
+[RabbitMQ]
+RabbitMQ = 'amqp'
+RabbitMQHost = 'localhost'
+RabbitMQPassWord = 'campushub'
+RabbitMQPort = '5672'
+RabbitMQUser = 'campushub'
+
+[Redis]
+DbName = 3
+IdleTimeout = 200
+MaxActive = 30
+MaxIdle = 30
+Password = 'campushub'
+Port = 6379
+
+[SMS]
+
+[Server]
+ReadTimeout = 60
+WriteTimeout = 60
+
+[Wechat]
+AppID = ''
+Secret = ''
