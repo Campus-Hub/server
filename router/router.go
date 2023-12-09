@@ -1,23 +1,21 @@
 package router
 
 import (
-	"net/http"
+	"github.com/Campus-Hub/server/api"
 
-	"github.com/gin-contrib/sessions"
-	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 )
 
 // Setup 路由配置
 func Setup() *gin.Engine {
 	r := gin.Default()
-	store := cookie.NewStore([]byte("something-very-secret"))
-
-	// middleware
-	r.Use(sessions.Sessions("mySession", store))
-	//r.Use(middleware.NewLogger(), middleware.Cors())
-
-	r.StaticFS("/static", http.Dir("./static"))
+	//store := cookie.NewStore([]byte("something-very-secret"))
+	//
+	//// middleware
+	//r.Use(sessions.Sessions("mySession", store))
+	////r.Use(middleware.NewLogger(), middleware.Cors())
+	//
+	//r.StaticFS("/static", http.Dir("./static"))
 
 	/**********  Resource Management  **********/
 	v1 := r.Group("/api/v1")
@@ -35,10 +33,12 @@ func Setup() *gin.Engine {
 		// Courses Management router version 1
 		coursev1 := v1.Group("/course")
 		{
-			// 通过ID？Name？获取课程信息
-			coursev1.GET("/:name")
+			// 查询课程清单
+			coursev1.GET("/", api.ListCourse)
 			// 创建课程
 			coursev1.POST("/")
+			// 通过ID？Name？获取课程信息
+			coursev1.GET("/:name")
 
 			authcoursev1 := coursev1.Group("/auth")
 			{

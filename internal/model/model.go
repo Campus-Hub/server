@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/Campus-Hub/server/pkg/consts"
+	clog "github.com/Campus-Hub/server/pkg/logger"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -13,7 +14,7 @@ import (
 	gormopentracing "gorm.io/plugin/opentracing"
 )
 
-var db *gorm.DB
+var DB *gorm.DB
 
 // Setup 初始化数据库
 func Setup() {
@@ -23,7 +24,7 @@ func Setup() {
 	)
 
 	// open the database and buffer the config
-	db, err = gorm.Open(mysql.Open(consts.MySQLDefaultDSN), &gorm.Config{
+	DB, err = gorm.Open(mysql.Open(consts.MySQLDefaultDSN), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
 			TablePrefix:   tablePrefix, // set the prefix name of table
 			SingularTable: true,        // use singular table by default
@@ -41,7 +42,7 @@ func Setup() {
 		panic(err)
 	}
 
-	mysqlDB, err := db.DB()
+	mysqlDB, err := DB.DB()
 	if err != nil {
 		log.Panicln("db.DB() err: ", err)
 	}
@@ -56,8 +57,9 @@ func Setup() {
 	// SetConnMaxLifeTime 设置连接的最大可复用时间。
 	mysqlDB.SetConnMaxLifetime(consts.ConnMaxLifetime)
 
-	if err = db.Use(gormopentracing.New()); err != nil {
-		panic(err)
+	if err = DB.Use(gormopentracing.New()); err != nil {
+		//panic(err)
+		clog.Logger.Warn("GORM Tracing Error: ", err)
 	}
 
 }

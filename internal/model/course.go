@@ -7,15 +7,17 @@ type (
 		Name string
 		// Publisher The contribution Team or person.
 		// TODO create struct for it.
-		Publisher string
-		// Disciplines, Categories of Courses.
-		Discipline string
-		License    string
+		ContributorTeam ContributorTeam
+		// Discipline: Categories of Courses.
+		Discipline  string
+		License     string
+		Origination string
 		// Version, optional, defined the version of lecture
 		// example: `23 fall`, `24 spring`, `2023`, `2024`.
 		Version string
 		TimestampedModel
 
+		// ResourceAddr: Course Website Link.
 		ResourceAddr string
 
 		// Lecture Description.
