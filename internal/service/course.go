@@ -1,7 +1,9 @@
 package service
 
 import (
+	"github.com/Campus-Hub/server/internal/model"
 	"github.com/Campus-Hub/server/internal/pack"
+	"github.com/Campus-Hub/server/pkg/logger"
 )
 
 type (
@@ -66,31 +68,34 @@ func (svr CourseSrv) List() ([]pack.Course, error) {
 	}, nil
 }
 
-// Get Course by ID, name.
-func (svr CourseSrv) Show() (pack.Course, error) {
-	//var (
-	//	courses []model.Course
-	//	err     error
-	//)
-	//
-	//err = model.DB.Model(model.Course{}).Find(&courses).Error
-	//if err != nil {
-	//	logger.Logger.Error(err)
-	//}
-	//
-	//packedList := pack.PackCourseList(courses)
-	//
-	//return packedList
+// Show Get Course by ID, name.
+func (svr CourseSrv) Show(id int64) (pack.Course, error) {
+	var (
+		courses model.Course
+		err     error
+	)
 
-	return pack.Course{
-		Name:            "Introduction to Programming",
-		ContributorTeam: "Code Masters",
-		Discipline:      "Computer Science",
-		License:         "MIT",
-		Origination:     "University XYZ",
-		Version:         "2022",
-		ResourceAddr:    "https://example.com/intro-to-programming",
-	}, nil
+	err = model.DB.Model(model.Course{}).Where("id = ?", id).Find(&courses).Error
+	//err = model.DB.Table("Course").Where("id = ?", id).Find(&courses).Error
+	if err != nil {
+		logger.Logger.Error(err)
+		return pack.Course{}, err
+	}
+
+	courseEntity := pack.PackCourse(courses)
+
+	return courseEntity, nil
+
+	// Example Return Result
+	//return pack.Course{
+	//	Name:            "Introduction to Programming",
+	//	ContributorTeam: "Code Masters",
+	//	Discipline:      "Computer Science",
+	//	License:         "MIT",
+	//	Origination:     "University XYZ",
+	//	Version:         "2022",
+	//	ResourceAddr:    "https://example.com/intro-to-programming",
+	//}, nil
 }
 
 func (svr CourseSrv) Create() (pack.Course, error) {

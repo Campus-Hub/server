@@ -57,6 +57,11 @@ func Setup() {
 	// SetConnMaxLifeTime 设置连接的最大可复用时间。
 	mysqlDB.SetConnMaxLifetime(consts.ConnMaxLifetime)
 
+	// Auto Migration
+	//err = DB.AutoMigrate(
+	//	&Course{}, &ContributorTeam{},
+	//)
+
 	if err = DB.Use(gormopentracing.New()); err != nil {
 		//panic(err)
 		clog.Logger.Warn("GORM Tracing Error: ", err)

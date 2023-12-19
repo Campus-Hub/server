@@ -1,6 +1,8 @@
 package api
 
 import (
+	"strconv"
+
 	"github.com/Campus-Hub/server/internal/service"
 	"github.com/Campus-Hub/server/pkg/errno"
 	"github.com/Campus-Hub/server/pkg/logger"
@@ -28,8 +30,15 @@ func ShowCourse(c *gin.Context) {
 		logger.Logger.Error(err)
 	}
 
+	// convert router parameter "id" to int.
+	course_id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		c.JSON(errno.InvalidParams, errorResponse(err))
+		logger.Logger.Info(err)
+	}
+
 	// Call Show Course Service Return Response.
-	res, err := svr.Show()
+	res, err := svr.Show(int64(course_id))
 	if err != nil {
 		c.JSON(errno.Error, errorResponse(err))
 		logger.Logger.Error(err)

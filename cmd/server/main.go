@@ -8,6 +8,8 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/Campus-Hub/server/internal/model"
+
 	"github.com/Campus-Hub/server/config"
 	_ "github.com/Campus-Hub/server/internal/model"
 	"github.com/Campus-Hub/server/pkg/logger"
@@ -19,7 +21,7 @@ import (
 func init() {
 	logger.Setup()
 	config.Setup()
-	// model.Setup()
+	model.Setup()
 	// cache.Setup()
 }
 

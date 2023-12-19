@@ -1,6 +1,10 @@
 package pack
 
-import "github.com/Campus-Hub/server/internal/model"
+import (
+	"strconv"
+
+	"github.com/Campus-Hub/server/internal/model"
+)
 
 type (
 	Course struct {
@@ -21,7 +25,7 @@ func Covert() {
 func PackCourse(course model.Course) Course {
 	return Course{
 		Name:            course.Name,
-		ContributorTeam: course.ContributorTeam.Name,
+		ContributorTeam: strconv.FormatInt(course.ContributorTeamID, 10),
 		Discipline:      course.Discipline,
 		License:         course.License,
 		Origination:     course.Origination,

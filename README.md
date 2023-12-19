@@ -34,9 +34,9 @@ This is the backend service for the campus-hub online. The aim of campus-hub is 
 
 
 
-![image-20231204114123795](D:\Project\campus-hub\campus-hub-server\assets\image-20231204114123795.png)
+![image-20231204114123795](F:\Project\campus-hub\campus-hub-server\assets\image-20231204114123795.png)
 
-![image-20231204114002161](D:\Project\campus-hub\campus-hub-server\assets\image-20231204114002161.png)
+![image-20231204114002161](F:\Project\campus-hub\campus-hub-server\assets\image-20231204114002161.png)
 
 ```go
 type (
@@ -104,3 +104,54 @@ type (
 PWA [Automatic reload | Guide | Vite PWA (vite-pwa-org.netlify.app)](https://vite-pwa-org.netlify.app/guide/auto-update.html#ssr-ssg)
 
 [markdown-it-wikilinks - npm (npmjs.com)](https://www.npmjs.com/package/markdown-it-wikilinks)
+
+
+
+
+
+### Changelog
+
+- [x] 基本架构
+- [ ] 课程模块
+  - [ ] Show: Query Course `->` ID/Name
+  - [ ] List: Query Courses `->` Name Match/Regex/Disciplines/Lecturer/Tags
+  - [ ] Remove: Delete Course by ID
+  - [ ] Create: Create Course.
+  - [ ] Update: Update Course By ID.
+- [ ] 资源模块
+  - [ ] 储存方式接口化
+    - [ ] OSS
+    - [ ] 本地
+
+
+
+### MySQL Init
+
+```mysql
++----+---------+-------------------+-------------+------------+--------------+-----------+------------+------------+-----------+-----------------------------------------+
+| ID | Name    | ContributorTeamID | Discipline  | License    | Origination  | Version   | CreatedAt  | UpdatedAt  | DeletedAt | ResourceAddr                            |
++----+---------+-------------------+-------------+------------+--------------+-----------+------------+------------+-----------+-----------------------------------------+
+|  1 | Course1 |                 1 | Discipline1 | MIT        | Origination1 | 23 fall   | 1702980457 | 1702980457 |      NULL | cdn.campus-hub.online/resource/course/1 |
+|  2 | Course2 |                 1 | Discipline2 | Apache 2.0 | Origination2 | 24 spring | 1702980457 | 1702980457 |      NULL | cdn.campus-hub.online/resource/course/2 |
+|  3 | Course3 |                 1 | Discipline3 | MIT        | Origination3 | 1.0       | 1702980457 | 1702980457 |      NULL | cdn.campus-hub.online/resource/course/3 |
++----+---------+-------------------+-------------+------------+--------------+-----------+------------+------------+-----------+-----------------------------------------+
+```
+
+```mysql
++-------------------+--------------+------+-----+---------+-------+
+| Field             | Type         | Null | Key | Default | Extra |
++-------------------+--------------+------+-----+---------+-------+
+| ID                | bigint       | NO   | PRI | NULL    |       |
+| Name              | varchar(255) | NO   |     | NULL    |       |
+| ContributorTeamID | bigint       | YES  |     | NULL    |       |
+| Discipline        | varchar(255) | YES  |     | NULL    |       |
+| License           | varchar(255) | YES  |     | NULL    |       |
+| Origination       | varchar(255) | YES  |     | NULL    |       |
+| Version           | varchar(255) | YES  |     | NULL    |       |
+| CreatedAt         | bigint       | YES  |     | NULL    |       |
+| UpdatedAt         | bigint       | YES  |     | NULL    |       |
+| DeletedAt         | bigint       | YES  |     | NULL    |       |
+| ResourceAddr      | varchar(255) | YES  |     | NULL    |       |
++-------------------+--------------+------+-----+---------+-------+
+```
+

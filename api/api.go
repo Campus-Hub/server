@@ -25,14 +25,14 @@ func errorResponse(err error) service.Response {
 	if _, ok := err.(*json.UnmarshalTypeError); ok {
 		return service.Response{
 			Status: 401,
-			Msg:    "JSON类型不匹配",
+			Msg:    "JSON Type No Match",
 			Error:  fmt.Sprint(err),
 		}
 	}
 
 	return service.Response{
 		Status: 401,
-		Msg:    "参数错误",
+		Msg:    "Invalid Parameters",
 		Error:  fmt.Sprint(err),
 	}
 }

@@ -8,7 +8,7 @@ var (
 
 const (
 	// Database Address
-	MySQLDefaultDSN = "campus:campushub@tcp(127.0.0.1:3306)/campus?charset=utf8mb4&parseTime=True&loc=Local"
+	MySQLDefaultDSN = "anxiu:anxiu0101@tcp(127.0.0.1:3306)/campus_hub?charset=utf8mb4&parseTime=True&loc=Local"
 	VercelCloudDSN  = ""
 
 	// Logger

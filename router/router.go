@@ -24,11 +24,11 @@ func Setup() *gin.Engine {
 			ctx.JSON(200, "v1 success")
 		})
 
-		// Resource management router version 1
-		resourcev1 := v1.Group("/resource")
-		{
-			resourcev1.POST("/upload")
-		}
+		//// Resource management router version 1
+		//resourcev1 := v1.Group("/resource")
+		//{
+		//	resourcev1.POST("/upload")
+		//}
 
 		// Courses Management router version 1
 		coursev1 := v1.Group("/course")
@@ -38,7 +38,8 @@ func Setup() *gin.Engine {
 			// 创建课程
 			coursev1.POST("/")
 			// 通过ID？Name？获取课程信息
-			coursev1.GET("/:name")
+			coursev1.GET("/:id", api.ShowCourse)
+			//coursev1.GET("/:name", api.ShowCourse)
 
 			authcoursev1 := coursev1.Group("/auth")
 			{

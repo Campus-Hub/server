@@ -3,8 +3,8 @@ AppName = 'campus-hub-server'
 
 [DB]
 Name = 'campushub'
-User = 'campushub'
-Password = '123456'
+User = 'anxiu'
+Password = 'anxiu0101'
 Port = 3306
 Type = 'mysql'
 
@@ -39,5 +39,5 @@ EndPoint = 'http://oss-cn-hangzhou.aliyuncs.com'
 AccessKeyId = ''
 AccessKeySecret = ''
 BucketName = ''
-MainDirecotory = 3
+MainDirectory = 3
 PartSize = 102400
